@@ -1,0 +1,117 @@
+.App {
+  background-color: #303131;
+  height: 100vh;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(73, 189, 149);
+  min-height: 72px;
+  font-size: 40px;
+  font-family: Titillium Web, sans-serif;
+  font-style: italic;
+}
+
+.axisWrapper {
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+  width: 90%;
+  margin: 0 auto;
+  padding-top: 17px;
+  position: relative;
+  margin-top: 8px;
+}
+
+.dot {
+  height: 11px;
+  width: 11px;
+  background-color: #bbb;
+  border-radius: 50%;
+  position: absolute;
+  top: -7px;
+  z-index: 100;
+}
+
+.descriptionEventName,
+.descriptionEventDetails {
+  user-select: none;
+}
+
+.axis {
+  display: flex;
+  flex-wrap: nowrap;
+  position: relative;
+  transition: 0.4s linear;
+}
+
+.notEnoghEvents {
+  display: flex;
+  justify-content: space-around;
+  width: 100vw;
+}
+
+.specificEvent {
+  padding-top: 8px;
+  position: relative;
+  display: inline-block;
+  text-align: center;
+}
+
+.fa-chevron-circle-right {
+  position: absolute;
+  top: -4px;
+  right: 0px;
+  z-index: 100;
+  display: inline-block;
+  padding: 2px;
+  color: grey;
+  cursor: pointer;
+  margin: 4px;
+}
+
+.fa-chevron-circle-left {
+  position: absolute;
+  color: grey;
+  top: -4px;
+  left: 0px;
+  z-index: 100;
+  display: inline-block;
+  padding: 2px;
+  cursor: pointer;
+  margin: 4px;
+
+}
+
+.fa-chevron-circle-left {
+  display: block;
+  width: 50px;
+  height: 50px;
+}
+
+.fa-chevron-circle-left.enableBtn:hover,
+.fa-chevron-circle-right.enableBtn:hover {
+  -webkit-transform: scale(1.2) rotate(0deg);
+  -ms-transform: scale(1.2) rotate(0deg);
+  transform: scale(1.1) rotate(0deg);
+  transition: .5s;
+
+}
+
+.wrapperAll {
+  width: 70%;
+  margin: 0 auto;
+  position: relative;
+}
+
+.disabledBtn {
+  cursor: not-allowed;
+}
+
+@media only screen and (max-width: 800px) {
+  .axisWrapper {
+    width: 75%;
+  }
+}
