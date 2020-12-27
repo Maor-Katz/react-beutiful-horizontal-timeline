@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useSwipeable } from "react-swipeable";
 
 export default function MyTimeline({
     myList,
@@ -6,13 +7,18 @@ export default function MyTimeline({
     lineColor,
     amountMove,
     labelWidth,
-    eventTextAlignCenter
+    eventTextAlignCenter,
+    showSlider
 }) {
     const [positionLeft, setpositionLeft] = useState(0);
     const [positionAllowed, setpositionAllowed] = useState(0);
     const [rightBtnEnable, setrightBtnEnable] = useState(true);
-    const checkIfNeedToDisableRightButton = (leftPosition) => {
+    const [prevIdx, setprevIdx] = useState(-1);
+    const [rightToLeft, setrightToLeft] = useState(null);
+    const [curStatus, setcurStatus] = useState(myList && Object.values(myList[0])[0]);
+    const [curIdx, setcurIdx] = useState(0);
 
+    const checkIfNeedToDisableRightButton = (leftPosition) => {
         if ((leftPosition * -1) >= positionAllowed) {//chack if its my last time i can click on right arrow, if yes, this loop shoud disable right arrow btn
             setpositionLeft(-positionAllowed);//set the maximum position that i can give to the axis
             setrightBtnEnable(false);//disable right arrow
@@ -64,6 +70,17 @@ export default function MyTimeline({
 
     };
 
+    const handlers = useSwipeable({
+        onSwiped: (eventData) => {
+            if (eventData.deltaX < 0) {
+                moveAxis('right', eventData.deltaX * -1);
+            } else {
+                moveAxis('left', eventData.deltaX);
+
+            }
+        }
+    });
+
     return (
         <div className="wrapperAll">
             {positionLeft === 0 ? <i class="fas fa-chevron-circle-left disabledBtn fa-2x"
@@ -84,9 +101,13 @@ export default function MyTimeline({
 
             ></i>
             }
-            <div className="axisWrapper" id="axisWrapper">
+            <div
+                className="axisWrapper"
+                id="axisWrapper"
+                {...handlers}
+            >
                 <div
-                    className={`axis ${positionAllowed <= 0 ? "notEnoghEvents" : ""}`}
+                    className={`axis ${positionAllowed < 0 ? "notEnoghEvents" : ""}`}
                     id="myAxis"
                     style={{
                         left: `${positionLeft}px`,
@@ -104,6 +125,15 @@ export default function MyTimeline({
                                 textAlign: `${eventTextAlignCenter ? "center" : "unset"}`
                             }}
                             key={index}
+                            onClick={() => {
+                                setcurIdx(index);
+                                setcurStatus('');
+                                setrightToLeft(index === curIdx ? null : (index > curIdx ? true : false));
+                                setTimeout(() => {
+                                    setprevIdx(curIdx);
+                                    setcurStatus(myList[index].details1);
+                                }, 0);
+                            }}
                         >
                             <div
                                 className="dot"
@@ -114,7 +144,6 @@ export default function MyTimeline({
                             ></div>
 
                             {Object.values(val).map((value, index) => {
-                                console.log(value);
                                 return <div key={index} className="descriptionEventDetails">{value}</div>;
                             })}
                         </div>;
@@ -136,6 +165,18 @@ export default function MyTimeline({
                         }}
                     ></i>
 
+            }
+
+            {
+                showSlider && <div className="wrapperEventCurrent">
+                    {
+                        curStatus && <span
+                            className="currentEventToShow"
+                            style={{ animationName: `${rightToLeft === null ? "top-to-bottom" : (rightToLeft ? "right-to-left" : "left-to-right")}` }}>
+                            {curStatus}
+                        </span>
+                    }
+                </div>
             }
         </div>
     );
