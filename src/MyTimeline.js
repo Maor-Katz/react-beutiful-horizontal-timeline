@@ -67,7 +67,6 @@ export default function MyTimeline({
     const calcPostionSlideLeft = () => {//calculate how many px i can move my axis
         let positionAllowed = document.getElementById("myAxis").getClientRects()[0].width - document.getElementById("axisWrapper").getClientRects()[0].width;
         setpositionAllowed(positionAllowed);
-
     };
 
     const handlers = useSwipeable({
@@ -76,7 +75,6 @@ export default function MyTimeline({
                 moveAxis('right', eventData.deltaX * -1);
             } else {
                 moveAxis('left', eventData.deltaX);
-
             }
         }
     });
@@ -91,14 +89,14 @@ export default function MyTimeline({
                     borderColor: "grey"
                 }}
 
-            ></i> : <i class="fas fa-chevron-circle-left enableBtn fa-2x"
+            ></i> : <i 
+                class="fas fa-chevron-circle-left enableBtn fa-2x"
                 id="leftArrow"
                 onClick={() => moveAxis('left', amountMove)}
                 style={{
                     color: lineColor,
                     borderColor: lineColor
                 }}
-
             ></i>
             }
             <div
@@ -151,14 +149,16 @@ export default function MyTimeline({
                 </div>
             </div>
             {
-                positionAllowed > 0 && rightBtnEnable ? <i class="fas fa-chevron-circle-right enableBtn fa-2x"
+                positionAllowed > 0 && rightBtnEnable ? <i 
+                    class="fas fa-chevron-circle-right enableBtn fa-2x"
                     onClick={() => moveAxis('right', amountMove)}
                     style={{
                         color: lineColor,
                         borderColor: lineColor
                     }}
                 ></i> :
-                    <i class="fas fa-chevron-circle-right disabledBtn fa-2x"
+                    <i 
+                        class="fas fa-chevron-circle-right disabledBtn fa-2x"
                         style={{
                             color: "grey",
                             borderColor: "grey"
