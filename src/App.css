@@ -13,6 +13,7 @@
   font-family: Titillium Web, sans-serif;
   font-style: italic;
 }
+
 .axisWrapper {
     display: flex;
     justify-content: space-between;
@@ -85,19 +86,12 @@
 
 }
 
-.fa-chevron-circle-left {
-    display: block;
-    width: 50px;
-    height: 50px;
-}
-
 .fa-chevron-circle-left.enableBtn:hover,
 .fa-chevron-circle-right.enableBtn:hover {
     -webkit-transform: scale(1.2) rotate(0deg);
     -ms-transform: scale(1.2) rotate(0deg);
     transform: scale(1.1) rotate(0deg);
     transition: .5s;
-
 }
 
 .wrapperAll {
@@ -146,7 +140,6 @@
     0% {
         transform: translate(750px, 0px);
         opacity: 0;
-
     }
 
     100% {
@@ -160,7 +153,6 @@
     0% {
         transform: translate(0px, -110px);
         opacity: 0;
-
     }
 
     100% {
@@ -174,7 +166,6 @@
     0% {
         transform: translate(-750px, 0px);
         opacity: 0;
-
     }
 
     100% {
